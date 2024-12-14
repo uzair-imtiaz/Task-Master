@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import errorMiddleware from './middleware/errorMidldleware';
 
 const app: Application = express();
 
@@ -10,6 +11,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
+app.use(errorMiddleware);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

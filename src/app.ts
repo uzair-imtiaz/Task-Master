@@ -26,7 +26,7 @@ app.use('/api/', apiLimiter);
 
 // Health check route
 app.get('/api/health', (req: Request, res: Response) => {
-  res.status(200).json({ status: 'API is running smoothly!' });
+  res.status(200).json({ status: 'API is running smoothly! 🚀' });
 });
 
 // 404 Route

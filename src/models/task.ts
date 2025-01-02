@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from 'config/database';
-import User from 'models/user';
+import sequelize from '../config/database';
+import User from './user';
 
 class Task extends Model {}
 
@@ -36,5 +36,7 @@ Task.init(
   },
   { sequelize, modelName: 'Task', timestamps: true, tableName: 'tasks' }
 );
+
+Task.belongsTo(User, { foreignKey: 'assignedTo', as: 'assignedUser' });
 
 export default Task;

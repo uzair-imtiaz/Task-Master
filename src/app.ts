@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import errorMiddleware from './middleware/errorMidldleware';
+import errorMiddleware from './middlewares/error.midldleware';
 
 const app: Application = express();
 

@@ -1,8 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/database';
-import User from './user';
+import sequelize from '../configs/sequelize.config';
+import User from './user.model';
+import { TaskAttributes, TaskCreationalAttributes } from '../types/task';
 
-class Task extends Model {}
+class Task extends Model<TaskAttributes, TaskCreationalAttributes> {}
 
 Task.init(
   {

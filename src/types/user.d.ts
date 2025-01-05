@@ -1,9 +1,12 @@
+import { Optional } from 'sequelize';
+
 export interface UserAttributes {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   username: string;
   password: string;
   email: string;
 }
 
-export interface UserCreationalAttibutes extends UserAttributes {}
+export interface UserCreationalAttributes
+  extends Optional<UserAttributes, 'id' | 'createdAt' | 'updatedAt'> {}

@@ -12,4 +12,4 @@ export interface TaskAttributes {
 }
 
 export interface TaskCreationalAttributes
-  extends Optional<TaskAttributes, 'createdAt' | 'updatedAt'> {}
+  extends Optional<TaskAttributes, 'id' | 'createdAt' | 'updatedAt'> {}

@@ -10,6 +10,9 @@ Task.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     description: {
       type: DataTypes.STRING,
@@ -25,15 +28,17 @@ Task.init(
     dueDate: {
       type: DataTypes.DATE,
     },
-    assignedTo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: null,
-      references: {
-        model: User,
-        key: 'id',
-      },
-    },
+    // assignedTo: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    //   defaultValue: null,
+    //   references: {
+    //     model: User,
+    //     key: 'id',
+    //   },
+    //   onDelete: 'SET NULL',
+    //   onUpdate: 'CASCADE',
+    // },
   },
   { sequelize, modelName: 'Task', timestamps: true, tableName: 'tasks' }
 );

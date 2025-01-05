@@ -1,16 +1,19 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../configs/sequelize.config';
-import { UserAttributes, UserCreationalAttibutes } from '../types/user';
+import { UserAttributes, UserCreationalAttributes } from '../types/user';
+import { hashPassword } from '../utils';
 
-class User extends Model<UserAttributes, UserCreationalAttibutes> {}
+class User extends Model<UserAttributes, UserCreationalAttributes> {
+  public password!: string;
+}
 
 User.init(
   {
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -36,5 +39,12 @@ User.init(
     timestamps: true,
   }
 );
+
+User.addHook('beforeSave', async (user: User) => {
+  if (user.changed('password')) {
+    const hashedPassword = await hashPassword(user.password);
+    user.password = hashedPassword;
+  }
+});
 
 export default User;

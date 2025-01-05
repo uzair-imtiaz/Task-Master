@@ -1,14 +1,18 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from '../config/database';
-import User from './user';
+import sequelize from '../configs/sequelize.config';
+import User from './user.model';
+import { TaskAttributes, TaskCreationalAttributes } from '../types/task';
 
-class Task extends Model {}
+class Task extends Model<TaskAttributes, TaskCreationalAttributes> {}
 
 Task.init(
   {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     description: {
       type: DataTypes.STRING,
@@ -24,15 +28,17 @@ Task.init(
     dueDate: {
       type: DataTypes.DATE,
     },
-    assignedTo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: null,
-      references: {
-        model: User,
-        key: 'id',
-      },
-    },
+    // assignedTo: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    //   defaultValue: null,
+    //   references: {
+    //     model: User,
+    //     key: 'id',
+    //   },
+    //   onDelete: 'SET NULL',
+    //   onUpdate: 'CASCADE',
+    // },
   },
   { sequelize, modelName: 'Task', timestamps: true, tableName: 'tasks' }
 );
